@@ -38,7 +38,10 @@ if( !class_exists( 'SN_Testimonials' ) ){
 
             // Create post type 
             require_once(SN_TESTIMONIALS_PATH.'/post-types/class.sn-testimonials-post-type.php');
-            $sn_testimonials_cpt = new SN_Testimonials_Post_Type();        
+            $sn_testimonials_cpt = new SN_Testimonials_Post_Type();
+            // Register widget
+            require_once(SN_TESTIMONIALS_PATH.'/widgets/class.sn-testimonials-widget.php');
+            $SN_Testimonials_Widget = new SN_Testimonials_Widget(); 
 
         }
 
