@@ -54,4 +54,6 @@ wp_reset_postdata();
 
 ?>
 
+<a href="<?php echo get_post_type_archive_link( 'sn-testimonials' )?>"><?php _e('Show more testimonials' , 'sn-testimonials') ?></a>
+
  

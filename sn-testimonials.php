@@ -41,7 +41,10 @@ if( !class_exists( 'SN_Testimonials' ) ){
             $sn_testimonials_cpt = new SN_Testimonials_Post_Type();
             // Register widget
             require_once(SN_TESTIMONIALS_PATH.'/widgets/class.sn-testimonials-widget.php');
-            $SN_Testimonials_Widget = new SN_Testimonials_Widget(); 
+            $SN_Testimonials_Widget = new SN_Testimonials_Widget();
+            // Custom templates
+            add_filter('archive_template' , array($this , 'load_custom_archive_template')); 
+            add_filter('single_template' , array($this , 'load_custom_single_template')); 
 
         }
 
@@ -53,6 +56,27 @@ if( !class_exists( 'SN_Testimonials' ) ){
             define ( 'SN_TESTIMONIALS_PATH', plugin_dir_path( __FILE__ ) );
             define ( 'SN_TESTIMONIALS_URL', plugin_dir_url( __FILE__ ) );
             define ( 'SN_TESTIMONIALS_VERSION', '1.0.0' );     
+        }
+
+        /*
+        * Load cuatom  archive template
+        */
+        public function load_custom_archive_template($template){
+            if(current_theme_supports( 'sn-testimonials' )){
+                if(is_post_type_archive( 'sn-testimonials' )){
+                    $template = SN_TESTIMONIALS_PATH.'views/templates/archive-sn-testimonials.php';
+                }
+            }
+            return $template;
+        }
+
+        public function load_custom_single_template($template){
+            if(current_theme_supports( 'sn-testimonials' )){
+                if(is_singular( 'sn-testimonials' )){
+                    $template = SN_TESTIMONIALS_PATH.'views/templates/single-sn-testimonials.php';
+                }
+            }
+            return $template;
         }
 
         /**
