@@ -98,7 +98,17 @@ if( !class_exists( 'SN_Testimonials' ) ){
          * Uninstall the plugin
          */
         public static function uninstall(){
+            delete_option( 'widget_sn-testimonials' );
+            // Remove all posts related with plugin
+            $posts = get_posts( array(
+                'post_type' => 'sn-testimonials' ,
+                'number_posts' => -1 ,
+                'post_status' => 'any'
+            ) );
 
+            foreach ($posts as $post) {
+                wp_delete_post( $post->ID , true);
+            }
         }
 
     }
